@@ -117,10 +117,6 @@ python tools/visual.py --cfg segvit_4_26.py --weight best.pth
 
 训练过程中基于验证集指标自动保存的最优 checkpoint 为 **`best.pth`**。
 
-## 📄 开源协议
-
-> TODO：补充开源协议（如 MIT、Apache 2.0 等）
-
 ## 🙏 致谢
 
 本项目基于 [SegViT](https://github.com/zbwxp/SegViT) 实现，感谢原作者的开源工作。
