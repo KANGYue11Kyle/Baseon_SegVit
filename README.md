@@ -1,122 +1,122 @@
 # Baseon_SegVit
-# 基于 SegViT 的手术器械腔体分割
+# Surgical Instrument Cavity Segmentation Based on SegViT
 
-基于 [SegViT](https://github.com/zbwxp/SegViT)（Segmentation with Vision Transformer）实现的手术器械腔体分割项目。采用轻量化 ViT 骨干网络，结合分割解码头与自定义损失函数，支持多卡训练、数据集预处理、训练/测试与可视化全流程。
+A surgical instrument cavity segmentation project implemented based on [SegViT](https://github.com/zbwxp/SegViT) (Segmentation with Vision Transformer). It adopts a lightweight ViT backbone network, combined with a segmentation decoder head and custom loss functions, and supports the full pipeline of multi-GPU training, dataset preprocessing, training/testing, and visualization.
 
-## 📁 仓库文件说明
+## 📁 Repository File Description
 
 ```
 .
-├── backbone/                                       # 轻量化 ViT 骨干网络定义代码，负责图像特征提取
-├── decode_heads/                                   # 分割解码头模块
-├── losses/                                         # 自定义损失函数模块
-├── tools/                                          # 全流程工具脚本
-│   ├── dist*.sh                                    # 多卡训练启动脚本
-│   ├── pre_data_train_val.py                       # 数据集预处理
-│   ├── train.py                                    # 模型训练
-│   ├── test.py                                     # 模型测试
-│   └── visual.py                                   # 生成分割可视化结果
-├── best.pth                                        # 基于验证集指标自动保存的最优二进制权重文件
-├── segvit.txt                                      # 本次训练全流程实验日志与参数记录
-├── segvit_4_26.py                                  # 模型核心配置文件
-├── 05_215125_acc_90.0_fg_35.7.jpg                  # 最优模型精度指标截图
-└── attention_tool2_manipulator.png                 # 注意力机制可视化结果图
+├── backbone/                                       # Lightweight ViT backbone network definition code, responsible for image feature extraction
+├── decode_heads/                                   # Segmentation decoder head module
+├── losses/                                         # Custom loss function module
+├── tools/                                          # Full-pipeline utility scripts
+│   ├── dist*.sh                                    # Multi-GPU training launch scripts
+│   ├── pre_data_train_val.py                       # Dataset preprocessing
+│   ├── train.py                                    # Model training
+│   ├── test.py                                     # Model testing
+│   └── visual.py                                   # Generate segmentation visualization results
+├── best.pth                                        # Optimal binary weight file automatically saved based on validation set metrics
+├── segvit.txt                                      # Full training pipeline experiment log and parameter records
+├── segvit_4_26.py                                  # Core model configuration file
+├── 05_215125_acc_90.0_fg_35.7.jpg                  # Screenshot of the optimal model accuracy metrics
+└── attention_tool2_manipulator.png                 # Attention mechanism visualization result
 ```
 
-## 🔍 模块说明
+## 🔍 Module Description
 
-| 文件 / 目录 | 说明 |
+| File / Directory | Description |
 | --- | --- |
-| `backbone/` | 存放轻量化 ViT 骨干网络定义代码，负责图像特征提取 |
-| `decode_heads/` | 分割解码头模块 |
-| `losses/` | 自定义损失函数模块 |
-| `tools/` | 全流程工具脚本 |
-| `tools/dist*.sh` | 多卡训练启动脚本 |
-| `tools/pre_data_train_val.py` | 数据集预处理 |
-| `tools/train.py` | 模型训练 |
-| `tools/test.py` | 模型测试 |
-| `tools/visual.py` | 生成分割可视化结果 |
-| `best.pth` | 训练过程中基于验证集指标自动保存的最优二进制权重文件 |
-| `segvit.txt` | 本次训练全流程实验日志与参数记录 |
-| `segvit_4_26.py` | 模型核心配置文件，定义网络结构、输入尺寸、类别数等超参数 |
-| `05_215125_acc_90.0_fg_35.7.jpg` | 最优模型精度指标截图 |
-| `attention_tool2_manipulator.png` | 注意力机制可视化结果图 |
+| `backbone/` | Stores the lightweight ViT backbone network definition code, responsible for image feature extraction |
+| `decode_heads/` | Segmentation decoder head module |
+| `losses/` | Custom loss function module |
+| `tools/` | Full-pipeline utility scripts |
+| `tools/dist*.sh` | Multi-GPU training launch scripts |
+| `tools/pre_data_train_val.py` | Dataset preprocessing |
+| `tools/train.py` | Model training |
+| `tools/test.py` | Model testing |
+| `tools/visual.py` | Generate segmentation visualization results |
+| `best.pth` | Optimal binary weight file automatically saved during training based on validation set metrics |
+| `segvit.txt` | Full training pipeline experiment log and parameter records |
+| `segvit_4_26.py` | Core model configuration file, defining hyperparameters such as network architecture, input size, and number of classes |
+| `05_215125_acc_90.0_fg_35.7.jpg` | Screenshot of the optimal model accuracy metrics |
+| `attention_tool2_manipulator.png` | Attention mechanism visualization result |
 
-## 🧠 模型结构
+## 🧠 Model Architecture
 
-- **主干网络（Backbone）**：轻量化 ViT（Vision Transformer），负责图像特征提取
-- **解码头（Decode Heads）**：分割解码头模块
-- **损失函数（Losses）**：自定义损失函数
-- **核心配置**：`segvit_4_26.py`，定义网络结构、输入尺寸、类别数等超参数
+- **Backbone**: Lightweight ViT (Vision Transformer), responsible for image feature extraction
+- **Decode Heads**: Segmentation decoder head module
+- **Losses**: Custom loss functions
+- **Core Configuration**: `segvit_4_26.py`, defining hyperparameters such as network architecture, input size, and number of classes
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境依赖
+### Environment Dependencies
 
-> TODO：补充 Python、PyTorch、CUDA 版本及依赖安装命令
+> TODO: Add Python, PyTorch, CUDA versions and dependency installation commands
 
 ```bash
-# 示例
+# Example
 pip install -r requirements.txt
 ```
 
-### 数据集预处理
+### Dataset Preprocessing
 
 ```bash
 python tools/pre_data_train_val.py
 ```
 
-### 模型训练
+### Model Training
 
-**单卡训练：**
+**Single-GPU training:**
 
 ```bash
 python tools/train.py --cfg segvit_4_26.py
 ```
 
-**多卡训练：**
+**Multi-GPU training:**
 
 ```bash
 bash tools/dist_train.sh
 ```
 
-> TODO：补充实际脚本名与参数说明
+> TODO: Add the actual script names and parameter descriptions
 
-训练过程中会基于验证集指标自动保存最优权重至 `best.pth`，全流程日志记录于 `segvit.txt`。
+During training, the optimal weights are automatically saved to `best.pth` based on validation set metrics, and the full pipeline log is recorded in `segvit.txt`.
 
-### 模型测试
+### Model Testing
 
 ```bash
 python tools/test.py --cfg segvit_4_26.py --weight best.pth
 ```
 
-### 结果可视化
+### Result Visualization
 
 ```bash
 python tools/visual.py --cfg segvit_4_26.py --weight best.pth
 ```
 
-## 📊 训练结果
+## 📊 Training Results
 
-最优模型精度指标：
+Optimal model accuracy metrics:
 
-![最优模型精度](05_215125_acc_90.0_fg_35.7.jpg)
+![Optimal Model Accuracy](05_215125_acc_90.0_fg_35.7.jpg)
 
-- **Accuracy**：90.0
-- **FG（前景）指标**：35.7
+- **Accuracy**: 90.0
+- **FG (Foreground) Metric**: 35.7
 
-> 指标截图文件名：`05_215125_acc_90.0_fg_35.7.jpg`
+> Metric screenshot filename: `05_215125_acc_90.0_fg_35.7.jpg`
 
-## 🎯 注意力可视化
+## 🎯 Attention Visualization
 
-模型注意力机制可视化结果（手术器械）：
+Visualization results of the model's attention mechanism (surgical instruments):
 
-![注意力可视化](attention_tool2_manipulator.png)
+![Attention Visualization](attention_tool2_manipulator.png)
 
-## 🏆 最优权重
+## 🏆 Optimal Weights
 
-训练过程中基于验证集指标自动保存的最优 checkpoint 为 **`best.pth`**。
+The optimal checkpoint automatically saved during training based on validation set metrics is **`best.pth`**.
 
-## 🙏 致谢
+## 🙏 Acknowledgements
 
-本项目基于 [SegViT](https://github.com/zbwxp/SegViT) 实现，感谢原作者的开源工作。
+This project is implemented based on [SegViT](https://github.com/zbwxp/SegViT). We thank the original authors for their open-source work.
